@@ -1,6 +1,33 @@
 const std = @import("std");
 const vector = @import("vector.zig");
 const Color = vector.Color;
+const Vec3 = vector.Vec3;
+const Point3 = vector.Point3;
+
+pub const Ray = struct {
+    orig: Point3 = Point3{},
+    dir: Vec3 = Vec3{},
+
+    const Self = @This();
+
+    pub fn init(origin: Point3, direction: Vec3) Self {
+        return Self{ .orig = origin, .dir = direction };
+    }
+};
+
+// tests
+const expect = std.testing.expect;
+const expectEqual = std.testing.expectEqual;
+test "create Ray" {
+    var test_ray = Ray.init(Point3.init(1, 2, 4), Vec3.init(5, 2, 1));
+    try expect(test_ray.orig.x() == @as(f32, 1));
+    try expect(test_ray.dir.y() == @as(f32, 2));
+    var orig = test_ray.orig;
+    orig.e[0] = 12;
+    try expect(test_ray.orig.x() == @as(f32, 1));
+}
+
+// MAIN
 
 pub fn main() anyerror!void {
     const image_width: u32 = 256;

@@ -8,13 +8,13 @@ pub const Vec3 = struct {
     pub fn init(e1: f32, e2: f32, e3: f32) Self {
         return Self{ .e = [3]f32{ e1, e2, e3 } };
     }
-    fn x(self: Self) f32 {
+    pub fn x(self: Self) f32 {
         return self.e[0];
     }
-    fn y(self: Self) f32 {
+    pub fn y(self: Self) f32 {
         return self.e[1];
     }
-    fn z(self: Self) f32 {
+    pub fn z(self: Self) f32 {
         return self.e[2];
     }
 
@@ -68,6 +68,7 @@ pub fn divScalar(u: Vec3, t: f32) Vec3 {
 pub fn dot(u: Vec3, v: Vec3) f32 {
     return @reduce(.Add, u.e * v.e);
 }
+
 pub fn cross(u: Vec3, v: Vec3) f32 {
     return Vec3{ .e = [3]f32{
         u.e[1] * v.e[2] - u.e[2] * v.e[1],
